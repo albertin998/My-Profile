@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_profile/tela_acess.dart';
 import 'customToggleSwitch.dart';
 import 'package:flutter/cupertino.dart';
+import 'theme/colors_palette.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,19 +62,62 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.chevron_left_outlined),
-                        Text('Meu perfil'),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.angleLeft,
+                            color: ColorsPalette.blue2,
+                          ),
+                          SizedBox(width: 20),
+                          Text(
+                            'Meu perfil',
+                            style: TextStyle(
+                              color: ColorsPalette.navyBlue3,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 17,
+                            ),
+                          ),
+                          Spacer(),
+
+                          Text(
+                            'Editar',
+                            style: TextStyle(
+                              color: ColorsPalette.blue2,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
 
                     Divider(),
 
                     Center(child: Icon(Icons.account_circle, size: 150)),
 
-                    Text('Facilita Ola'),
-                    Text('Administrador'),
+                    Text(
+                      'Facilita Ola',
+                      style: TextStyle(
+                        color: ColorsPalette.navyBlue3,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 22,
+                      ),
+                    ),
+                    Text(
+                      'Administrador',
+                      style: TextStyle(
+                        color: ColorsPalette.navyBlue2,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+
+                    SizedBox(height: 25),
 
                     CustomToggleSwitch(
                       SelectedIndex: _indiceSelecionado,
@@ -101,32 +146,86 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(20),
                         sliver: SliverList(
                           delegate: SliverChildListDelegate([
-                            const Text(
-                              "Dados Pessoais",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 25),
+                              child: Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.lightUserCircle,
+                                    color: ColorsPalette.blue2,
+                                  ),
+                                  SizedBox(width: 8),
+
+                                  const Text(
+                                    "Dados Pessoais",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20),
-                            _buildCampoTexto("Nome"),
-                            _buildCampoTexto("CPF"),
-                            _buildCampoTexto("Endereço"),
-                            _buildCampoTexto("Cidade"),
-                            _buildCampoTexto("Telefone"),
-                            const Text(
-                              "Dados Pessoais",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            _buildCampoTexto("Nome", 'Nome:'),
+                            _buildCampoTexto("CPF", 'CPF:'),
+                            _buildCampoTexto("Endereço", 'Endereço:'),
+                            _buildCampoTexto("Cidade", 'Cidade:'),
+                            _buildCampoTexto("Telefone", 'Telefone:'),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30),
+                              child: Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.lightPhoneVolume,
+                                    color: ColorsPalette.blue2,
+                                  ),
+
+                                  SizedBox(width: 10),
+                                  const Text(
+                                    "Telefones para contatos",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20),
-                            _buildCampoTexto("Nome"),
-                            _buildCampoTexto("CPF"),
-                            _buildCampoTexto("Endereço"),
-                            _buildCampoTexto("Cidade"),
-                            _buildCampoTexto("Telefone"),
+                            _buildCampoTexto("Celular", 'Celular:'),
+                            _buildCampoTexto("Telefone", 'Telefone:'),
+                            _buildCampoTexto("E-mail", 'E-mail:'),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30),
+                              child: Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.lightMapMarkerAlt,
+                                    color: ColorsPalette.blue2,
+                                  ),
+
+                                  SizedBox(width: 10),
+
+                                  const Text(
+                                    "Endereço",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            _buildCampoTexto("CEP", 'CEP:'),
+                            _buildCampoTexto("Endereço", 'Endereço:'),
+                            _buildCampoTexto("Estado", 'Estado:'),
+                            _buildCampoTexto("Cidade", 'Cidade:'),
                           ]),
                         ),
                       ),
@@ -144,20 +243,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget _buildCampoTexto(String label) {
+Widget _buildCampoTexto(String label, String titulo) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 15.0),
 
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle()),
+        Text(
+          titulo,
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+        ),
         TextField(
+          cursorHeight: 18,
+          cursorColor: ColorsPalette.blue1,
+          cursorWidth: 2,
+
           decoration: InputDecoration(
             hintText: label,
-            labelText: label,
+            hintStyle: TextStyle(color: ColorsPalette.lightGrey2),
 
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorsPalette.lightGrey1, width: 1),
+              borderRadius: BorderRadius.circular(5),
+            ),
+
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorsPalette.lightGrey1, width: 1),
+              borderRadius: BorderRadius.circular(5),
+            ),
           ),
         ),
       ],

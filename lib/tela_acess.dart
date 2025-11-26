@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_profile/theme/colors_palette.dart';
 
 class TelaAcess extends StatelessWidget {
   const TelaAcess({super.key});
@@ -17,19 +19,50 @@ class TelaAcess extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Dados de Acesso',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        fontSize: 18,
-                      ),
+                    Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.lightLock,
+                          color: ColorsPalette.blue2,
+                        ),
+
+                        SizedBox(width: 10),
+                        Text(
+                          'Dados de Acesso',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
 
                     SizedBox(height: 30),
 
-                    _buildcampoTexto('E-mail'),
-                    _buildcampoTexto('Senha'),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      child: _buildcampoTexto('E-mail'),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Senha'),
+                          TextField(
+                            decoration: InputDecoration(
+                              hintText: 'senha',
+                              //labelText: label,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     _buildcampoTexto('Confirmar Senha'),
                     Container(
                       margin: const EdgeInsets.only(top: 20),

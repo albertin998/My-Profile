@@ -75,6 +75,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "97dcc183e998dad44dcb030e17930eb8d54bf1fa"
+      url: "git@bitbucket.org:fastdoneimex/font_awesome_flutter.git"
+    source: git
+    version: "10.4.0"
   leak_tracker:
     dependency: transitive
     description:
