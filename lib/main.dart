@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_profile/submitButtomWidget.dart';
 import 'package:my_profile/tela_acess.dart';
 import 'customToggleSwitch.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const MyHomePage(),
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'SVN-Gilroy',
+      ),
     );
   }
 }
@@ -98,7 +102,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     Divider(),
 
-                    Center(child: Icon(Icons.account_circle, size: 150)),
+                    Stack(
+                      children: [
+                        Container(
+                          width: 130,
+                          height: 130,
+
+                          // clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('assets/imags/foto_perfil.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+
+                          right: -1,
+
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1.4,
+                                color: ColorsPalette.lightGrey2,
+                              ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Center(
+                              child: FaIcon(
+                                size: 20,
+                                FontAwesomeIcons.camera,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
 
                     Text(
                       'Facilita Ola',
@@ -146,26 +191,25 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(20),
                         sliver: SliverList(
                           delegate: SliverChildListDelegate([
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 25),
-                              child: Row(
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.lightUserCircle,
-                                    color: ColorsPalette.blue2,
-                                  ),
-                                  SizedBox(width: 8),
+                            Row(
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.lightUserCircle,
+                                  color: ColorsPalette.blue2,
+                                ),
+                                SizedBox(width: 8),
 
-                                  const Text(
-                                    "Dados Pessoais",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      height: 0,
-                                      fontSize: 18,
-                                    ),
+                                const Text(
+                                  "Dados Pessoais",
+                                  style: TextStyle(
+                                    fontFamily: 'SVN-Gilroy',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                    fontSize: 18,
+                                    color: Color.fromRGBO(23, 43, 70, 1),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 20),
                             _buildCampoTexto("Nome", 'Nome:'),
@@ -237,6 +281,17 @@ class _MyHomePageState extends State<MyHomePage> {
               TelaAcess(),
             ],
           ),
+        ),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerFloat, // Mudado para Float
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: SizedBox(
+          width: double.infinity,
+          height: 55,
+
+          child: Submitbuttomwidget(),
         ),
       ),
     );

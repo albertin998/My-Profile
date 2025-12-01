@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_profile/theme/colors_palette.dart';
 
-class TelaAcess extends StatelessWidget {
-  const TelaAcess({super.key});
+class TelaAcess extends StatefulWidget {
+  TelaAcess({super.key});
+
+  @override
+  State<TelaAcess> createState() => _TelaAcessState();
+}
+
+class _TelaAcessState extends State<TelaAcess> {
+  bool _estaOculto = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +49,7 @@ class TelaAcess extends StatelessWidget {
 
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                      child: _buildcampoTexto('E-mail'),
+                      child: _buildcampoTexto('E-mail', 'E-mail:'),
                     ),
 
                     Padding(
@@ -50,11 +57,41 @@ class TelaAcess extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Senha'),
+                          Text(
+                            'Senha:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
                           TextField(
+                            obscureText: _estaOculto,
                             decoration: InputDecoration(
-                              hintText: 'senha',
-                              //labelText: label,
+                              hintText: 'Senha',
+
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.only(right: 5),
+                                child: IconButton(
+                                  icon: _estaOculto
+                                      ? FaIcon(
+                                          FontAwesomeIcons.lightEyeSlash,
+                                          size: 20,
+                                          color: ColorsPalette.blue2,
+                                        )
+                                      : FaIcon(
+                                          FontAwesomeIcons.lightEye,
+                                          size: 20,
+                                          color: ColorsPalette.blue2,
+                                        ),
+
+                                  onPressed: () {
+                                    setState(() {
+                                      _estaOculto = !_estaOculto;
+                                    });
+                                  },
+                                ),
+                              ),
+
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -63,7 +100,7 @@ class TelaAcess extends StatelessWidget {
                         ],
                       ),
                     ),
-                    _buildcampoTexto('Confirmar Senha'),
+                    _buildcampoTexto('Confirmar Senha', 'Confirnar senha:'),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
                       padding: const EdgeInsets.symmetric(
@@ -101,16 +138,29 @@ class TelaAcess extends StatelessWidget {
     );
   }
 
-  Widget _buildcampoTexto(String label) {
+  Widget _buildcampoTexto(String label, String titulo, {IconData? icone}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text(
+          titulo,
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+        ),
         TextField(
           decoration: InputDecoration(
             hintText: label,
-            //labelText: label,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+
+            suffixIcon: icone != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 12, left: 5),
+                    child: FaIcon(icone, color: ColorsPalette.blue2, size: 22),
+                  )
+                : null,
+
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(color: ColorsPalette.green2, width: 1),
+            ),
           ),
         ),
       ],
